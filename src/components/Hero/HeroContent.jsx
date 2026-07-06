@@ -53,8 +53,8 @@ export default function HeroContent() {
           as="span"
           display="block"
           bgGradient="to-r"
-          gradientFrom="green.400"
-          gradientTo="red.300"
+          gradientFrom="red.300"
+          gradientTo="purple.500"
           bgClip="text"
         >
           Faster
