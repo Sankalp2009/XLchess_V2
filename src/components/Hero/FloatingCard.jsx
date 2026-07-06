@@ -1,6 +1,14 @@
 import { Box, Flex, Text, Icon } from '@chakra-ui/react'
+import { memo } from 'react'
 
-export default function FloatingCard({ icon, title, value, color = 'violet.400', delay = '0s', position = {} }) {
+function FloatingCard({
+  icon,
+  title,
+  value,
+  color = 'violet.400',
+  delay = '0s',
+  position = {},
+}) {
   return (
     <Box
       position="absolute"
@@ -12,11 +20,12 @@ export default function FloatingCard({ icon, title, value, color = 'violet.400',
       px="4"
       py="3.5"
       shadow="0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)"
-      animation={`floatCard 4.5s ease-in-out ${delay} infinite`}
+      animation={`floatCard 4s ease-in-out ${delay} infinite`}
       zIndex="2"
       minW="148px"
-      transition="border-color 0.2s, transform 0.2s"
-      _hover={{ borderColor: 'rgba(108,99,255,0.5)', transform: 'scale(1.04)' }}
+      transition="border-color 0.15s"
+      style={{ willChange: 'transform' }}
+      _hover={{ borderColor: 'rgba(108,99,255,0.4)' }}
     >
       <Flex align="center" gap="3">
         <Box
@@ -33,10 +42,22 @@ export default function FloatingCard({ icon, title, value, color = 'violet.400',
           <Icon as={icon} boxSize="4" color={color} />
         </Box>
         <Box>
-          <Text fontSize="2xs" color="gray.600" fontWeight="medium" letterSpacing="wide" textTransform="uppercase">
+          <Text
+            fontSize="2xs"
+            color="gray.600"
+            fontWeight="medium"
+            letterSpacing="wide"
+            textTransform="uppercase"
+          >
             {title}
           </Text>
-          <Text fontSize="sm" fontWeight="bold" color="white" lineHeight="1.3" mt="0.5">
+          <Text
+            fontSize="sm"
+            fontWeight="bold"
+            color="white"
+            lineHeight="1.3"
+            mt="0.5"
+          >
             {value}
           </Text>
         </Box>
@@ -44,3 +65,5 @@ export default function FloatingCard({ icon, title, value, color = 'violet.400',
     </Box>
   )
 }
+
+export default memo(FloatingCard)

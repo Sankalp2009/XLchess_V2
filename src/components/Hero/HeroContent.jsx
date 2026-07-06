@@ -1,14 +1,16 @@
 import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react'
+import { memo } from 'react'
 import CTAButton from './CTAButton'
 import TrustBadges from './TrustBadges'
 
-export default function HeroContent() {
+function HeroContent() {
   return (
     <VStack
       align="flex-start"
       gap={{ base: '7', md: '8' }}
       maxW={{ base: 'full', lg: '580px' }}
-      animation="slideUp 0.7s ease both"
+      animation="slideUp 0.6s ease both"
+      style={{ willChange: 'transform' }}
     >
       {/* Eyebrow badge */}
       <Flex
@@ -20,20 +22,28 @@ export default function HeroContent() {
         bg="rgba(108,99,255,0.1)"
         border="1px solid rgba(108,99,255,0.3)"
         backdropFilter="blur(8px)"
-        animation="fadeIn 0.6s ease 0.15s both"
+        animation="fadeIn 0.5s ease both"
         display="inline-flex"
         w="fit-content"
+        style={{ willChange: 'opacity' }}
       >
         <Box
           w="6px"
           h="6px"
           rounded="full"
           bg="violet.400"
-          shadow="0 0 10px rgba(199, 209, 52, 0.9)"
+          shadow="0 0 10px rgba(108,99,255,0.9)"
           animation="pulse 2s ease infinite"
           flexShrink="0"
+          style={{ willChange: 'box-shadow' }}
         />
-        <Text fontSize="xs" fontWeight="semibold" color="yellow.300" letterSpacing="wider" textTransform="uppercase">
+        <Text
+          fontSize="xs"
+          fontWeight="semibold"
+          color="violet.300"
+          letterSpacing="wider"
+          textTransform="uppercase"
+        >
           AI-Powered Chess Training
         </Text>
       </Flex>
@@ -46,18 +56,19 @@ export default function HeroContent() {
         lineHeight="shorter"
         letterSpacing="tight"
         color="white"
-        animation="slideUp 0.7s ease 0.1s both"
+        animation="slideUp 0.6s ease both"
+        style={{ willChange: 'transform' }}
       >
-        Master Chess
+        Master The Future of Chess
         <Box
           as="span"
           display="block"
           bgGradient="to-r"
-          gradientFrom="red.300"
-          gradientTo="purple.500"
+          gradientFrom="violet.400"
+          gradientTo="purple.300"
           bgClip="text"
         >
-          Faster
+          Smarter Faster
         </Box>
       </Heading>
 
@@ -67,11 +78,15 @@ export default function HeroContent() {
         color="gray.400"
         lineHeight="tall"
         maxW="460px"
-        animation="slideUp 0.7s ease 0.2s both"
+        animation="fadeIn 0.5s ease 0.1s both"
+        style={{ willChange: 'opacity' }}
       >
         Learn, compete, solve puzzles, and improve with AI-powered training.
-        Join <Box as="span" color="violet.300" fontWeight="semibold">25,000+ players</Box> who
-        leveled up their game on XLChess.
+        Join{' '}
+        <Box as="span" color="violet.300" fontWeight="semibold">
+          25,000+ players
+        </Box>{' '}
+        who leveled up their game on XLChess.
       </Text>
 
       {/* CTA Row */}
@@ -79,10 +94,13 @@ export default function HeroContent() {
         gap={{ base: '3', sm: '4' }}
         flexWrap="wrap"
         align="center"
-        animation="slideUp 0.7s ease 0.3s both"
+        animation="fadeIn 0.5s ease 0.15s both"
+        style={{ willChange: 'opacity' }}
       >
         <CTAButton variant="primary">Start Playing Free</CTAButton>
-        <CTAButton variant="secondary" icon>Watch Demo</CTAButton>
+        <CTAButton variant="secondary" icon>
+          Watch Demo
+        </CTAButton>
       </Flex>
 
       {/* Trust Badges */}
@@ -92,3 +110,5 @@ export default function HeroContent() {
     </VStack>
   )
 }
+
+export default memo(HeroContent)

@@ -1,7 +1,14 @@
 import { Box, Text, Icon } from '@chakra-ui/react'
+import { memo } from 'react'
 import { LuPlay } from 'react-icons/lu'
 
-export default function CTAButton({ children, variant = 'primary', href = '#', icon = false, onClick }) {
+function CTAButton({
+  children,
+  variant = 'primary',
+  href = '#',
+  icon = false,
+  onClick,
+}) {
   const isPrimary = variant === 'primary'
 
   return (
@@ -68,3 +75,5 @@ export default function CTAButton({ children, variant = 'primary', href = '#', i
     </Box>
   )
 }
+
+export default memo(CTAButton)

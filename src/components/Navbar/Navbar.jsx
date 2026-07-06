@@ -1,23 +1,59 @@
-import { Box, Flex, HStack, Link, Text, IconButton, Icon } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
+import {
+  Box,
+  Flex,
+  HStack,
+  Link,
+  Text,
+  IconButton,
+  Icon,
+} from '@chakra-ui/react'
+import { useState, useEffect, useCallback, memo } from 'react'
 import { LuMenu, LuX } from 'react-icons/lu'
 
 const NAV_LINKS = [
-  { label: 'Play',    href: '#' },
-  { label: 'Learn',   href: '#' },
+  { label: 'Play', href: '#' },
+  { label: 'Learn', href: '#' },
   { label: 'Puzzles', href: '#' },
-  { label: 'Watch',   href: '#' },
+  { label: 'Watch', href: '#' },
 ]
 
-export default function Navbar() {
+// Throttle helper
+const useThrottle = (callback, delay) => {
+  const lastRun = useCallback(() => {
+    let last = Date.now()
+    return () => {
+      const now = Date.now()
+      if (now - last >= delay) {
+        callback()
+        last = now
+      }
+    }
+  }, [callback, delay])
+  return lastRun()
+}
+
+function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    let throttleTimeout
+    const onScroll = () => {
+      if (throttleTimeout) return
+      throttleTimeout = setTimeout(() => {
+        setScrolled(window.scrollY > 20)
+        throttleTimeout = null
+      }, 100)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (throttleTimeout) clearTimeout(throttleTimeout)
+    }
   }, [])
+
+  const toggleMenu = useCallback(() => setMenuOpen((o) => !o), [])
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   return (
     <Box
@@ -42,7 +78,14 @@ export default function Navbar() {
         justify="space-between"
       >
         {/* Logo */}
-        <Flex align="center" gap="3" as="a" href="#" aria-label="XLChess Home" textDecoration="none">
+        <Flex
+          align="center"
+          gap="3"
+          as="a"
+          href="#"
+          aria-label="XLChess Home"
+          textDecoration="none"
+        >
           <Box
             w="38px"
             h="38px"
@@ -54,20 +97,44 @@ export default function Navbar() {
             shadow="0 0 24px rgba(108,99,255,0.5)"
             flexShrink="0"
           >
-            <Text fontSize="xl" lineHeight="1" role="img" aria-label="knight piece">♞</Text>
+            <Text
+              fontSize="xl"
+              lineHeight="1"
+              role="img"
+              aria-label="knight piece"
+            >
+              ♞
+            </Text>
           </Box>
           <Box>
-            <Text fontWeight="black" fontSize="lg" letterSpacing="wider" color="white" lineHeight="1">
+            <Text
+              fontWeight="black"
+              fontSize="lg"
+              letterSpacing="wider"
+              color="white"
+              lineHeight="1"
+            >
               XLCHESS
             </Text>
-            <Text fontSize="2xs" color="violet.400" letterSpacing="widest" lineHeight="1.2" mt="0.5">
+            <Text
+              fontSize="2xs"
+              color="violet.400"
+              letterSpacing="widest"
+              lineHeight="1.2"
+              mt="0.5"
+            >
               Excel at Chess
             </Text>
           </Box>
         </Flex>
 
         {/* Desktop Nav */}
-        <HStack gap="8" display={{ base: 'none', md: 'flex' }} as="nav" aria-label="Main navigation">
+        <HStack
+          gap="8"
+          display={{ base: 'none', md: 'flex' }}
+          as="nav"
+          aria-label="Main navigation"
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
@@ -94,7 +161,11 @@ export default function Navbar() {
             px="4"
             py="2"
             rounded="lg"
-            _hover={{ color: 'white', bg: 'rgba(108,99,255,0.1)', textDecoration: 'none' }}
+            _hover={{
+              color: 'white',
+              bg: 'rgba(108,99,255,0.1)',
+              textDecoration: 'none',
+            }}
             transition="all 0.2s"
           >
             Sign In
@@ -110,7 +181,10 @@ export default function Navbar() {
             py="2.5"
             rounded="xl"
             shadow="0 4px 18px rgba(108,99,255,0.4)"
-            _hover={{ shadow: '0 6px 24px rgba(108,99,255,0.6)', transform: 'translateY(-1px)' }}
+            _hover={{
+              shadow: '0 6px 24px rgba(108,99,255,0.6)',
+              transform: 'translateY(-1px)',
+            }}
             transition="all 0.2s"
             display="inline-block"
             textDecoration="none"
@@ -125,7 +199,7 @@ export default function Navbar() {
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           variant="ghost"
           color="white"
-          onClick={() => setMenuOpen((o) => !o)}
+          onClick={toggleMenu}
           _hover={{ bg: 'rgba(108,99,255,0.15)' }}
         >
           <Icon as={menuOpen ? LuX : LuMenu} boxSize="5" />
@@ -155,7 +229,7 @@ export default function Navbar() {
               fontSize="md"
               _hover={{ color: 'white', textDecoration: 'none' }}
               borderBottom="1px solid rgba(255,255,255,0.05)"
-              onClick={() => setMenuOpen(false)}
+              onClick={closeMenu}
             >
               {link.label}
             </Link>
@@ -171,7 +245,11 @@ export default function Navbar() {
               py="3"
               rounded="xl"
               border="1px solid rgba(108,99,255,0.3)"
-              _hover={{ color: 'white', textDecoration: 'none', borderColor: 'rgba(108,99,255,0.6)' }}
+              _hover={{
+                color: 'white',
+                textDecoration: 'none',
+                borderColor: 'rgba(108,99,255,0.6)',
+              }}
               transition="all 0.2s"
             >
               Sign In
@@ -198,3 +276,5 @@ export default function Navbar() {
     </Box>
   )
 }
+
+export default memo(Navbar)

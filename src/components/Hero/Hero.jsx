@@ -1,8 +1,9 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
+import { memo } from 'react'
 import HeroContent from './HeroContent'
 import HeroImage from './HeroImage'
 
-export default function Hero() {
+function Hero() {
   return (
     <Box
       as="section"
@@ -37,7 +38,8 @@ export default function Hero() {
         pointerEvents="none"
         zIndex="0"
         css={{
-          background: 'radial-gradient(ellipse 90% 55% at 50% -5%, rgba(108,99,255,0.14) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse 90% 55% at 50% -5%, rgba(108,99,255,0.14) 0%, transparent 65%)',
         }}
       />
 
@@ -63,7 +65,9 @@ export default function Hero() {
         h="180px"
         pointerEvents="none"
         zIndex="0"
-        css={{ background: 'linear-gradient(to top, #0B1023 0%, transparent 100%)' }}
+        css={{
+          background: 'linear-gradient(to top, #0B1023 0%, transparent 100%)',
+        }}
       />
 
       <Container maxW="1280px" position="relative" zIndex="1">
@@ -80,3 +84,5 @@ export default function Hero() {
     </Box>
   )
 }
+
+export default memo(Hero)

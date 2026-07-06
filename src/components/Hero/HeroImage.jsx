@@ -1,5 +1,6 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react'
 import { LuTrendingUp, LuBrain, LuPuzzle, LuFlame, LuZap } from 'react-icons/lu'
+import { memo } from 'react'
 import ChessBoard from './ChessBoard'
 import FloatingCard from './FloatingCard'
 
@@ -17,7 +18,7 @@ const CARDS = [
     title: 'AI Coach',
     value: 'Active Now',
     color: 'violet.400',
-    delay: '0.9s',
+    delay: '0.3s',
     position: { top: '20px', right: '-58px' },
   },
   {
@@ -25,7 +26,7 @@ const CARDS = [
     title: 'Daily Puzzle',
     value: 'Solved! ✓',
     color: 'yellow.400',
-    delay: '1.6s',
+    delay: '0.6s',
     position: { bottom: '90px', right: '-62px' },
   },
   {
@@ -33,7 +34,7 @@ const CARDS = [
     title: 'Win Streak',
     value: '7 Games',
     color: 'orange.400',
-    delay: '0.5s',
+    delay: '0.2s',
     position: { bottom: '20px', left: '-52px' },
   },
   {
@@ -41,20 +42,21 @@ const CARDS = [
     title: 'Live Match',
     value: 'In Progress',
     color: 'cyan.400',
-    delay: '2.1s',
+    delay: '0.4s',
     position: { top: '42%', left: '-58px' },
   },
 ]
 
-export default function HeroImage() {
+function HeroImage() {
   return (
     <Box
       position="relative"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      animation="fadeIn 0.9s ease 0.35s both"
+      animation="fadeIn 0.8s ease both"
       w={{ base: 'full', lg: 'auto' }}
+      style={{ willChange: 'opacity' }}
     >
       {/* Outer glow ring */}
       <Box
@@ -63,9 +65,10 @@ export default function HeroImage() {
         h={{ base: '340px', md: '460px' }}
         rounded="full"
         bg="radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%)"
-        animation="pulseGlow 5s ease infinite"
+        animation="pulseGlow 6s ease infinite"
         pointerEvents="none"
         zIndex="0"
+        style={{ willChange: 'opacity, transform' }}
       />
       {/* Inner glow */}
       <Box
@@ -74,18 +77,20 @@ export default function HeroImage() {
         h={{ base: '220px', md: '280px' }}
         rounded="full"
         bg="radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%)"
-        animation="pulseGlow 5s ease 1.2s infinite"
+        animation="pulseGlow 6s ease 1.5s infinite"
         pointerEvents="none"
         zIndex="0"
+        style={{ willChange: 'opacity, transform' }}
       />
 
       {/* Board wrapper with float animation */}
       <Box
         position="relative"
-        animation="floatUp 5.5s ease-in-out infinite"
+        animation="floatUp 5s ease-in-out infinite"
         zIndex="1"
         mt={{ base: '8', lg: '0' }}
         mx={{ base: '8', lg: '14' }}
+        style={{ willChange: 'transform' }}
       >
         <ChessBoard />
 
@@ -120,13 +125,18 @@ export default function HeroImage() {
             backdropFilter="blur(12px)"
             border="1px solid rgba(108,99,255,0.2)"
             rounded="xl"
-            animation={`floatCard 4.5s ease-in-out ${card.delay} infinite`}
+            animation={`floatCard 4s ease-in-out ${card.delay} infinite`}
+            style={{ willChange: 'transform' }}
           >
             <Icon as={card.icon} boxSize="3.5" color={card.color} />
-            <Text fontSize="2xs" color="gray.300" fontWeight="semibold">{card.value}</Text>
+            <Text fontSize="2xs" color="gray.300" fontWeight="semibold">
+              {card.value}
+            </Text>
           </Flex>
         ))}
       </Flex>
     </Box>
   )
 }
+
+export default memo(HeroImage)
