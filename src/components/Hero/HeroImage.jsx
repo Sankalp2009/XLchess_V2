@@ -54,7 +54,7 @@ function HeroImage() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      animation="fadeIn 0.8s ease both"
+      animation="fadeIn 0.7s ease both"
       w={{ base: 'full', lg: 'auto' }}
       style={{ willChange: 'opacity' }}
     >
@@ -64,8 +64,8 @@ function HeroImage() {
         w={{ base: '340px', md: '460px' }}
         h={{ base: '340px', md: '460px' }}
         rounded="full"
-        bg="radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%)"
-        animation="pulseGlow 6s ease infinite"
+        bg="radial-gradient(circle, rgba(108,99,255,0.16) 0%, transparent 70%)"
+        animation="pulseGlow 7s ease infinite"
         pointerEvents="none"
         zIndex="0"
         style={{ willChange: 'opacity, transform' }}
@@ -76,8 +76,8 @@ function HeroImage() {
         w={{ base: '220px', md: '280px' }}
         h={{ base: '220px', md: '280px' }}
         rounded="full"
-        bg="radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%)"
-        animation="pulseGlow 6s ease 1.5s infinite"
+        bg="radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 70%)"
+        animation="pulseGlow 7s ease 1.8s infinite"
         pointerEvents="none"
         zIndex="0"
         style={{ willChange: 'opacity, transform' }}
@@ -86,7 +86,7 @@ function HeroImage() {
       {/* Board wrapper with float animation */}
       <Box
         position="relative"
-        animation="floatUp 5s ease-in-out infinite"
+        animation="floatUp 5.5s ease-in-out infinite"
         zIndex="1"
         mt={{ base: '8', lg: '0' }}
         mx={{ base: '8', lg: '14' }}

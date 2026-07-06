@@ -1,18 +1,21 @@
 # XLChess Hero Section
 
+## Project Overview   
+
 This project was created as part of the XLChess Stage 2 Full-Stack Developer technical assessment.
 
 I selected **Option 2 – Improve**, modernizing the existing homepage hero section while preserving the XLChess brand identity. The implementation focuses on responsive design, accessibility, reusable React components, performance, and polished user interactions.
 
 ## 🎯 Features
 
-- **Interactive Chess Board** - Real-time chess board visualization with piece movements
-- **AI Training** - Train with AI-powered chess coaching
-- **Daily Puzzles** - Solve chess puzzles to improve your game
-- **Competitive Play** - Play against other players in real-time
-- **Rating System** - Track your ELO rating and progress
-- **Win Streaks** - Maintain and track your win streaks
-- **Responsive Design** - Seamless experience on desktop, tablet, and mobile
+- Modernized hero section based on the existing XLChess homepage
+- Responsive layout for desktop, tablet, and mobile
+- AI-powered branding badge
+- Interactive chessboard-inspired hero visual
+- Floating information cards with subtle animations
+- Primary and secondary call-to-action buttons
+- Reusable React component architecture
+- Accessible UI built with Chakra UI
 
 ## 🎨 Design Decisions
 
@@ -30,12 +33,21 @@ Key improvements include:
 - Modern glassmorphism styling
 - Responsive layout optimized for desktop, tablet, and mobile
 
+## 💡 Engineering Decisions
+
+The implementation focuses on producing a maintainable and production-ready React application.
+
+- Components were separated by responsibility to improve maintainability.
+- Chakra UI was chosen to accelerate development while preserving accessibility.
+- The visual design intentionally stays close to the existing XLChess branding while modernizing the overall experience.
+- Animations were intentionally kept subtle to improve perceived quality while maintaining smooth performance across devices.
+
 ## 📌 Assumptions
 
 - The assessment only required recreating the homepage hero section.
 - Existing XLChess branding should remain recognizable.
 - The chessboard shown in the hero is a visual representation rather than a fully playable board.
-- The navigation was included to provide a complete hero experience.
+- A lightweight navigation was included because it is visually integrated with the existing homepage hero.
 
 ## ⚖ Trade-offs
 
@@ -120,25 +132,6 @@ vite.config.js                    # Vite build configuration
 package.json                      # Project dependencies
 ```
 
-## 🛠 Available Scripts
-
-### `npm run dev`
-Starts the Vite development server with hot module replacement (HMR).
-
-### `npm run build`
-Creates an optimized production build with:
-- 3-pass Terser minification
-- CSS code splitting
-- JavaScript chunking (react-vendor, chakra-ui, icons)
-- Source map removal
-- ES2020 target optimization
-
-### `npm run lint`
-Runs ESLint to check code quality.
-
-### `npm run preview`
-Serves the production build locally for testing.
-
 ## 🎨 Technology Stack
 
 ### Frontend Framework
@@ -167,7 +160,7 @@ The main landing page section featuring:
 - AI-Powered Chess Training badge
 - Call-to-action buttons
 - Trust badges with social proof
-- Interactive chess board display
+- Chessboard-inspired hero visualization
 - Floating stat cards
 
 ### Chess Board
@@ -180,7 +173,7 @@ Interactive chess board component with:
 - Responsive sizing
 
 ### Navbar
-Fixed navigation header featuring:
+Minimal navigation integrated into the hero section:
 - Logo with branding
 - Navigation links (Play, Learn, Puzzles, Watch)
 - Sign In / Get Started buttons
