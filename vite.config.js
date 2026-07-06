@@ -39,14 +39,22 @@ export default defineConfig({
           }
           return `assets/[name]-[hash][extname]`
         },
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'chakra-ui': [
-            '@chakra-ui/react',
-            '@emotion/react',
-            '@emotion/styled',
-          ],
-          icons: ['react-icons'],
+        manualChunks: (id) => {
+          if (!id.includes('node_modules')) return undefined
+
+          if (id.includes('react') || id.includes('react-dom')) {
+            return 'react-vendor'
+          }
+
+          if (id.includes('@chakra-ui') || id.includes('@emotion')) {
+            return 'chakra-ui'
+          }
+
+          if (id.includes('react-icons')) {
+            return 'icons'
+          }
+
+          return 'vendor'
         },
       },
     },
